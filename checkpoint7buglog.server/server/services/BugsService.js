@@ -26,6 +26,14 @@ class BugsService {
     return await dbContext.Bug.create(body)
   }
 
+  async delete(id, userId) {
+    const bug = await dbContext.Bug.findOneAndUpdate({ _id: id, creatorId: userId }, { closed: true })
+    if (!bug) {
+      throw new BadRequest('DONT TOUCH ME')
+    }
+    return bug
+  }
+
   async edit(id, body) {
     const update = sanitizeBody(body)
     const bug = await dbContext.Bug.findOneAndUpdate({ _id: id, creatorId: body.creatorId },

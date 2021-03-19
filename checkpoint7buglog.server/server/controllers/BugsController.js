@@ -13,6 +13,7 @@ export class BugsController extends BaseController {
       .post('', this.create)
       .put('/:id', this.edit)
       .get('/:id/notes', this.getAllNotesbyBugId)
+      .delete('/:id', this.delete)
   }
 
   async getAll(req, res, next) {
@@ -44,6 +45,14 @@ export class BugsController extends BaseController {
     try {
       req.body.creatorId = req.userInfo.id
       res.send(await bugsService.edit(req.params.id, req.body))
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async delete(req, res, next) {
+    try {
+      res.send(await bugsService.delete(req.params.id, req.userIfo.id))
     } catch (error) {
       next(error)
     }
