@@ -17,6 +17,14 @@ class NotesService {
   async create(body) {
     return await dbContext.Note.create(body)
   }
+
+  async delete(id) {
+    const note = await dbContext.Note.findOneAndRemove({ _id: id })
+    if (!note) {
+      throw new BadRequest('Oi, you cant do that')
+    }
+    return note
+  }
 }
 
 export const notesService = new NotesService()
