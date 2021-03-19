@@ -5,7 +5,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 const Note = new Schema(
   {
     body: { type: String, required: true },
-    bug: { type: ObjectId, ref: 'Bug', required: true },
+    bug: { type: ObjectId, ref: 'bug', required: true },
     creatorId: { type: String, required: true }
   }, { timestamps: true, toJSON: { virtuals: true } })
 

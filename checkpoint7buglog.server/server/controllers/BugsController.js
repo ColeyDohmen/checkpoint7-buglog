@@ -43,7 +43,7 @@ export class BugsController extends BaseController {
   async edit(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
-      res.send(await bugsService.edit(req.params.id, req.userInfo.id, req.body), { new: true, runValidators: true })
+      res.send(await bugsService.edit(req.params.id, req.body))
     } catch (error) {
       next(error)
     }
@@ -51,7 +51,7 @@ export class BugsController extends BaseController {
 
   async getAllNotesbyBugId(req, res, next) {
     try {
-      return res.send(await notesService.findById({ note: req.params.id }))
+      return res.send(await notesService.find({ bug: req.params.id }))
     } catch (error) {
       next(error)
     }

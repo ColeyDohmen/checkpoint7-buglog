@@ -3,7 +3,8 @@ import { BadRequest } from '../utils/Errors'
 
 function sanitizeBody(body) {
   const writable = {
-    closed: body.closed
+    title: body.title,
+    description: body.description
   }
   return writable
 }
@@ -25,14 +26,17 @@ class BugsService {
     return await dbContext.Bug.create(body)
   }
 
-  async edit(id, userId, body) {
+  async edit(id, body) {
     const update = sanitizeBody(body)
-    const bug = await dbContext.Bug.findOneAndUpdate({ _id: id, creatorId: userId }, body, { new: true, runValidators: true })
+    const bug = await dbContext.Bug.findOneAndUpdate({ _id: id, creatorId: body.creatorId },
+      { $set: update },
+      { runValidators: true, setDefaultsOnInsert: true, new: true })
     if (!bug) {
       throw new BadRequest('Error Dude, you cant touch this guy')
     }
     return bug
   }
 }
+// { _id: id, creatorId: userId }, body, { $set: update }, { new: true, runValidators: true }
 
 export const bugsService = new BugsService()
