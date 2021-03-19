@@ -1,0 +1,15 @@
+
+  {
+    "name": "checkpoint7buglog",
+    "version": "1.0.0",
+    "scripts": {
+      "build": "npm run setup:client && npm run setup:server",
+      "setup:client": "cd checkpoint7buglog.client && npm i",
+      "setup:server": "cd checkpoint7buglog.server && npm i",
+      "start": "node checkpoint7buglog.server/index.js"
+    },
+    "engines": {
+      "node": "^14.15.4"
+    }
+  }
+  
