@@ -44,6 +44,7 @@ export class BugsController extends BaseController {
   async edit(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
+      delete req.body.closed
       res.send(await bugsService.edit(req.params.id, req.body))
     } catch (error) {
       next(error)
@@ -52,7 +53,7 @@ export class BugsController extends BaseController {
 
   async delete(req, res, next) {
     try {
-      res.send(await bugsService.delete(req.params.id, req.userIfo.id))
+      res.send(await bugsService.delete(req.params.id))
     } catch (error) {
       next(error)
     }

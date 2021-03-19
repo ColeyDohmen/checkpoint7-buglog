@@ -1,14 +1,6 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
-function sanitizeBody(body) {
-  const writable = {
-    title: body.title,
-    description: body.description
-  }
-  return writable
-}
-
 class BugsService {
   async findBug(query = {}) {
     return await dbContext.Bug.find(query).populate('creator')
@@ -26,8 +18,8 @@ class BugsService {
     return await dbContext.Bug.create(body)
   }
 
-  async delete(id, userId) {
-    const bug = await dbContext.Bug.findOneAndUpdate({ _id: id, creatorId: userId }, { closed: true })
+  async delete(id) {
+    const bug = await dbContext.Bug.findOneAndUpdate({ _id: id }, { closed: true })
     if (!bug) {
       throw new BadRequest('DONT TOUCH ME')
     }
@@ -35,16 +27,13 @@ class BugsService {
   }
 
   async edit(id, body) {
-    const update = sanitizeBody(body)
-    const bug = await dbContext.Bug.findOneAndUpdate({ _id: id, creatorId: body.creatorId },
-      { $set: update },
-      { runValidators: true, setDefaultsOnInsert: true, new: true })
+    const bug = await dbContext.Bug.findOneAndUpdate({ _id: id, creatorId: body.creatorId, closed: false }, body
+    )
     if (!bug) {
       throw new BadRequest('Error Dude, you cant touch this guy')
     }
     return bug
   }
 }
-// { _id: id, creatorId: userId }, body, { $set: update }, { new: true, runValidators: true }
 
 export const bugsService = new BugsService()
