@@ -23,11 +23,11 @@
             Home
           </router-link>
         </li>
-        <!-- <li class="nav-item">
+        <li class="nav-item">
           <router-link :to="{ name: 'ActiveBugPage' }" class="nav-link">
             Bugs
           </router-link>
-        </li> -->
+        </li>
         <li class="nav-item">
           <router-link :to="{ name: 'About' }" class="nav-link">
             About

@@ -23,23 +23,20 @@
 <script>
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
-import { useRoute } from 'vue-router'
-import { bugService } from '../services/BugsService'
+import { bugsService } from '../services/BugsService'
 export default {
   name: 'HomePage',
   setup() {
-    const route = useRoute()
     const state = reactive({
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
       bugs: computed(() => AppState.bugs)
     })
     onMounted(async () => {
-      await bugService.getBugs(route.params.id)
+      await bugsService.getAllBugs()
     })
     return {
-      state,
-      route
+      state
     }
   },
   components: {}

@@ -7,11 +7,11 @@
         </h3>
         <p>{{ bug.creatorId.email }}</p>
       </div>
-      <!-- <router-link :to="{ name: 'ActiveBugPage', params: { id: bug.id } }"> -->
-      <button type="button" class="btn btn-primary">
-        Open bug<i class="fas fa-chevron-right"></i>
-      </button>
-      <!-- </router-link> -->
+      <router-link :to="{ name: 'ActiveBugPage', params: { id: bug.id } }">
+        <button type="button" class="btn btn-primary">
+          Open bug<i class="fas fa-chevron-right"></i>
+        </button>
+      </router-link>
     </div>
   </div>
 </template>

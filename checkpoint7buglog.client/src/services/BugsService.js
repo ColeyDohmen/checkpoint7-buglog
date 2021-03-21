@@ -2,13 +2,13 @@ import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
-class BugService {
-  async getBugs() {
+class BugsService {
+  async getAllBugs() {
     try {
       const res = await api.get('api/bugs')
       AppState.bugs = res.data
     } catch (error) {
-      logger.error('Wot', error)
+      logger.error(AppState.bugs)
     }
   }
 
@@ -32,4 +32,4 @@ class BugService {
   }
 }
 
-export const bugService = new BugService()
+export const bugsService = new BugsService()
