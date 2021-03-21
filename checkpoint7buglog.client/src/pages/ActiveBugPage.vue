@@ -8,7 +8,8 @@
       <h3>
         {{ state.bug.description }}
       </h3>
-      <p>- {{ state.user.email }} {{ state.user.picture }}</p>
+      <p>- {{ state.user.email }}</p>
+      <div>{{ state.user.picture }}</div>
     </div>
     <div class="row">
       <h4>Notes:</h4>
@@ -39,7 +40,13 @@ export default {
     })
     return {
       state,
-      route
+      route,
+      async createNote() {
+        state.newNote.bug = state.bug
+        state.newNote.user = state.user
+        await notesService.createNote(state.newNote)
+        state.newNote = {}
+      }
     }
   },
   components: {}

@@ -6,9 +6,7 @@
     <router-view />
   </main>
   <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
-    </div>
+    <div class="bg-dark text-light text-center p-4">Made with 💖 by Coley</div>
   </footer>
 </template>
 
@@ -26,5 +24,4 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
-
 </style>

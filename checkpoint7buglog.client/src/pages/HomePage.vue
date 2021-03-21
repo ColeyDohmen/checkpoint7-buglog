@@ -1,9 +1,9 @@
 <template>
   <div class="home-page container-fluid">
-    <div class="col">
+    <div class="col py-2">
       <button
         type="button"
-        class="btn btn-info btn-lg"
+        class="btn btn-info btn-lg py-2"
         data-toggle="modal"
         data-target="#create-bug"
       >
