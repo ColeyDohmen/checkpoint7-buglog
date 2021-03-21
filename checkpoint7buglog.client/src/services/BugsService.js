@@ -12,9 +12,9 @@ class BugsService {
     }
   }
 
-  async createBug(bugData) {
+  async createBug(newBug) {
     try {
-      const res = await api.post('api/bugs', bugData)
+      const res = await api.post('api/bugs', newBug)
       AppState.bugs.push(res.data)
       return res.data.id
     } catch (error) {
@@ -25,7 +25,7 @@ class BugsService {
   async getBug(id) {
     try {
       const res = await api.get('api/bugs/' + id)
-      AppState.activeBug = res.data
+      AppState.newBug = res.data
     } catch (error) {
       logger.log(error)
     }

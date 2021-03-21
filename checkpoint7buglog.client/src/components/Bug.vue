@@ -26,7 +26,8 @@ export default {
   },
   setup() {
     const state = reactive({
-      user: computed(() => AppState.user)
+      user: computed(() => AppState.user),
+      bug: computed(() => AppState.bugs)
     })
     return {
       state

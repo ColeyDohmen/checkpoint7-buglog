@@ -1,9 +1,15 @@
 <template>
-  <div class="activebugpage">
-    <p>bugs</p>
-    <h1 class="p-4" id="titleText">
-      {{ state.bug.title }}
-    </h1>
+  <div class="activebugpage text-center container-fluid">
+    <p></p>
+    <div class="card">
+      <h1 class="p-4" id="titleText">
+        {{ state.bug.title }}
+      </h1>
+      <h3>
+        {{ state.bug.description }}
+      </h3>
+      <p>-{{ state.user.email }} {{ state.user.picture }}</p>
+    </div>
   </div>
 </template>
 
@@ -18,10 +24,9 @@ export default {
     const route = useRoute()
     const state = reactive({
       user: computed(() => AppState.user),
-      bugs: computed(() => AppState.bugs),
-      bug: computed(() => AppState.activeBug),
+      bug: computed(() => AppState.newBug),
       notes: computed(() => AppState.notes),
-      newList: {}
+      newNote: {}
     })
     onMounted(async () => {
       await bugsService.getBug(route.params.id)

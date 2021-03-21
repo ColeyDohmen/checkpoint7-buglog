@@ -33,6 +33,17 @@
                   aria-describedby="helpId"
                   v-model="state.newBug.title"
                 />
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="description"
+                    id="description"
+                    class="form-control"
+                    placeholder="Enter bug description..."
+                    aria-describedby="helpId"
+                    v-model="state.newBug.description"
+                  />
+                </div>
               </div>
             </form>
           </div>
@@ -57,7 +68,7 @@ import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { logger } from '../utils/Logger'
 import $ from 'jquery'
-import { bugService } from '../services/BugsService'
+import { bugsService } from '../services/BugsService'
 export default {
   name: 'CreateBugModal',
   setup() {
@@ -69,7 +80,7 @@ export default {
       state,
       async createBug() {
         try {
-          const bugId = await bugService.createBug(state.newBug)
+          const bugId = await bugsService.createBug(state.newBug)
           $('#create-bug').modal('hide')
           state.newBug.user = state.user
           router.push({ name: 'ActiveBugPage', params: { id: bugId } })
