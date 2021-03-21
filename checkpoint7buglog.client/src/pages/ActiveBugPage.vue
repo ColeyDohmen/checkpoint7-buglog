@@ -8,7 +8,11 @@
       <h3>
         {{ state.bug.description }}
       </h3>
-      <p>-{{ state.user.email }} {{ state.user.picture }}</p>
+      <p>- {{ state.user.email }} {{ state.user.picture }}</p>
+    </div>
+    <div class="row">
+      <h4>Notes:</h4>
+      <Notes v-for="note in state.notes" :key="note.id" :note="note" />
     </div>
   </div>
 </template>
@@ -17,6 +21,7 @@
 import { computed, onMounted, reactive } from 'vue'
 import { AppState } from '../AppState'
 import { bugsService } from '../services/BugsService'
+import { notesService } from '../services/NotesService'
 import { useRoute } from 'vue-router'
 export default {
   name: 'ActiveBugPage',
@@ -30,6 +35,7 @@ export default {
     })
     onMounted(async () => {
       await bugsService.getBug(route.params.id)
+      await notesService.getBugNotes(route.params.id)
     })
     return {
       state,
