@@ -23,9 +23,10 @@ const routes = [
     beforeEnter: authGuard
   },
   {
-    path: '/bugs',
+    path: '/bugs/:id',
     name: 'ActiveBugPage',
-    component: loadPage('ActiveBugPage')
+    component: loadPage('ActiveBugPage'),
+    beforeEnter: authGuard
   }
 ]
 

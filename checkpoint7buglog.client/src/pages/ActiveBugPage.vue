@@ -1,20 +1,28 @@
 <template>
   <div class="activebugpage text-center container-fluid">
     <p></p>
-    <div class="card">
-      <h1 class="p-4" id="titleText">
-        {{ state.bug.title }}
-      </h1>
-      <h3>
-        {{ state.bug.description }}
-      </h3>
-      <p>- {{ state.user.email }}</p>
-      <div>{{ state.user.picture }}</div>
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="card">
+          <h1 class="p-4" id="titleText">
+            {{ state.bug.title }}
+          </h1>
+          <h3>
+            {{ state.bug.description }}
+          </h3>
+          <p>- {{ state.user.email }}</p>
+          <div class="text-center">
+            <img :src="state.user.picture" class="profile-picture" />
+          </div>
+        </div>
+      </div>
     </div>
     <div class="row">
       <h4>Notes:</h4>
+      <!-- {{ state.notes }} -->
       <Notes v-for="note in state.notes" :key="note.id" :note="note" />
     </div>
+    <h5></h5>
   </div>
 </template>
 
@@ -54,4 +62,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.profile-picture {
+  height: 40vh;
+  width: 40vh;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="notes">
-    <p>{{ notes.body }} hey</p>
+    <p>{{ note.body }}</p>
     <form @submit.prevent="createNote">
       <div class="form-group">
         <input
@@ -22,12 +22,15 @@ import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
 export default {
   name: 'Notes',
-  props: { list: { type: Object, required: true } },
+  props: {
+    note: { type: Object, required: true }
+  },
+
   setup() {
     const state = reactive({
       user: computed(() => AppState.user),
       bug: computed(() => AppState.newBug),
-      notes: computed(() => AppState.notes)
+      newNote: {}
     })
     return {
       state
