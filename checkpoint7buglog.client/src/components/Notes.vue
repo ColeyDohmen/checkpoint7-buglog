@@ -1,19 +1,10 @@
 <template>
-  <div class="notes">
-    <p>{{ note.body }}</p>
-    <form @submit.prevent="createNote">
-      <div class="form-group">
-        <input
-          type="text"
-          name="body"
-          id="body"
-          class="form-control"
-          placeholder="Enter new note"
-          aria-describedby="helpId"
-          v-model="state.newNote.body"
-        />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="notes col-12 text-center">
+        <p>{{ note.body }}</p>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 

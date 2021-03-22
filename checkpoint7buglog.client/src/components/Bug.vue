@@ -6,6 +6,7 @@
           <b>{{ bug.title }}</b>
         </h3>
         <p>{{ bug.creatorId.email }}</p>
+        <p>{{ bug.closedDate }}</p>
       </div>
       <router-link :to="{ name: 'ActiveBugPage', params: { id: bug.id } }">
         <button type="button" class="btn btn-primary">

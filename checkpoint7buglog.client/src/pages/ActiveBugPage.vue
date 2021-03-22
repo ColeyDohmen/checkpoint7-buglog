@@ -12,13 +12,31 @@
           </h3>
           <p>- {{ state.user.email }}</p>
           <div class="text-center">
-            <img :src="state.user.picture" class="profile-picture" />
+            <img :src="state.user.picture" class="profile-picture my-2" />
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <h4>Notes:</h4>
+      <div class="col-12">
+        <h4>Notes:</h4>
+        <!-- <form @submit.prevent="createNote"> -->
+        <div class="form-group py-2 mx-2">
+          <input
+            type="text"
+            name="body"
+            id="body"
+            class="form-control"
+            placeholder="Enter new note"
+            aria-describedby="helpId"
+            v-model="state.newNote.body"
+          />
+          <button class="btn btn-success py-2 mx-2 my-2" @click="createNote">
+            Submit
+          </button>
+        </div>
+        <!-- </form> -->
+      </div>
       <!-- {{ state.notes }} -->
       <Notes v-for="note in state.notes" :key="note.id" :note="note" />
     </div>
