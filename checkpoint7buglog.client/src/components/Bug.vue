@@ -6,7 +6,11 @@
           <b>{{ bug.title }}</b>
         </h3>
         <p>{{ bug.creatorId.email }}</p>
-        <p>{{ bug.closedDate }}</p>
+        <div class="div">
+          STATUS:
+          <p v-if="bug.closed == true" class="text-danger">CLOSED</p>
+          <p v-if="bug.closed == false" class="text-success">OPEN</p>
+        </div>
       </div>
       <router-link :to="{ name: 'ActiveBugPage', params: { id: bug.id } }">
         <button type="button" class="btn btn-primary">

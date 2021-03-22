@@ -14,11 +14,17 @@ class NotesService {
 
   async createNote(newNote) {
     try {
-      const res = await api.post('api/notes', newNote)
-      AppState.notes.push(res.data)
+      await api.post('api/notes', newNote)
+      // AppState.notes.push(res.data)
+      this.getBugNotes(newNote.bug)
     } catch (error) {
       logger.log(error)
     }
+  }
+
+  async deleteNote(id, bugId) {
+    if (window.confirm('But are you sure?')) { await api.delete('api/notes/' + id) }
+    this.getBugNotes(bugId)
   }
 }
 export const notesService = new NotesService()

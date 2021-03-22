@@ -30,6 +30,11 @@ class BugsService {
       logger.log(error)
     }
   }
+
+  async deleteBug(id) {
+    if (window.confirm('But are you sure?')) { await api.delete('api/bugs/' + id) }
+    this.getBug(id)
+  }
 }
 
 export const bugsService = new BugsService()

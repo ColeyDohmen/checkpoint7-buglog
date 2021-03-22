@@ -3,16 +3,29 @@
     <p></p>
     <div class="row justify-content-center">
       <div class="col">
-        <div class="card">
+        <div class="card" v-if="state.bug.creator">
+          <i
+            id="deleteButton"
+            type="button"
+            class="fas fa-skull text-danger float-right"
+            @click="deleteBug"
+          ></i>
           <h1 class="p-4" id="titleText">
             {{ state.bug.title }}
           </h1>
           <h3>
             {{ state.bug.description }}
           </h3>
-          <p>- {{ state.user.email }}</p>
+          <p>- {{ state.bug.creator.email }}</p>
           <div class="text-center">
-            <img :src="state.user.picture" class="profile-picture my-2" />
+            <img
+              :src="state.bug.creator.picture"
+              class="profile-picture my-2"
+            />
+          </div>
+          <div>
+            <p v-if="state.bug.closed == true" class="text-danger">CLOSED</p>
+            <p v-if="state.bug.closed == false" class="text-success">OPEN</p>
           </div>
         </div>
       </div>
@@ -20,26 +33,27 @@
     <div class="row">
       <div class="col-12">
         <h4>Notes:</h4>
-        <!-- <form @submit.prevent="createNote"> -->
-        <div class="form-group py-2 mx-2">
-          <input
-            type="text"
-            name="body"
-            id="body"
-            class="form-control"
-            placeholder="Enter new note"
-            aria-describedby="helpId"
-            v-model="state.newNote.body"
-          />
-          <button class="btn btn-success py-2 mx-2 my-2" @click="createNote">
-            Submit
-          </button>
-        </div>
-        <!-- </form> -->
+        <form @submit.prevent="createNote">
+          <div class="form-group py-2 mx-2">
+            <input
+              type="text"
+              name="body"
+              id="body"
+              class="form-control"
+              placeholder="Enter new note"
+              aria-describedby="helpId"
+              v-model="state.newNote.body"
+            />
+            <button class="btn btn-success py-2 mx-2 my-2" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
       <!-- {{ state.notes }} -->
       <Notes v-for="note in state.notes" :key="note.id" :note="note" />
     </div>
+    <!-- <Bug :bug="bug" /> -->
     <h5></h5>
   </div>
 </template>
@@ -52,7 +66,10 @@ import { notesService } from '../services/NotesService'
 import { useRoute } from 'vue-router'
 export default {
   name: 'ActiveBugPage',
-  setup() {
+  props: {
+    bug: { type: Object, required: true }
+  },
+  setup(props) {
     const route = useRoute()
     const state = reactive({
       user: computed(() => AppState.user),
@@ -68,10 +85,12 @@ export default {
       state,
       route,
       async createNote() {
-        state.newNote.bug = state.bug
-        state.newNote.user = state.user
+        state.newNote.bug = state.bug.id
         await notesService.createNote(state.newNote)
         state.newNote = {}
+      },
+      async deleteBug() {
+        await bugsService.deleteBug(route.params.id)
       }
     }
   },
