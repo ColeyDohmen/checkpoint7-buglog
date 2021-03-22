@@ -5,9 +5,10 @@
       <div class="col">
         <div class="card" v-if="state.bug.creator">
           <i
+            v-if="state.bug.creator.email == state.user.email"
             id="deleteButton"
             type="button"
-            class="fas fa-skull text-danger float-right"
+            class="fas fa-skull text-danger float-right my-2"
             @click="deleteBug"
           ></i>
           <h1 class="p-4" id="titleText">
@@ -26,6 +27,10 @@
           <div>
             <p v-if="state.bug.closed == true" class="text-danger">CLOSED</p>
             <p v-if="state.bug.closed == false" class="text-success">OPEN</p>
+          </div>
+          <div>
+            <!-- {{ state.bug.updatedAt.slice(0, 10) }} -->
+            Last updated: {{ fixDate(state.bug.updatedAt) }}
           </div>
         </div>
       </div>
@@ -91,6 +96,12 @@ export default {
       },
       async deleteBug() {
         await bugsService.deleteBug(route.params.id)
+      },
+      fixDate(update) {
+        const year = update.slice(0, 4)
+        const day = update.slice(5, 7)
+        const month = update.slice(8, 10)
+        return day + '-' + month + '-' + year
       }
     }
   },
@@ -100,7 +111,9 @@ export default {
 
 <style lang="scss" scoped>
 .profile-picture {
-  height: 40vh;
-  width: 40vh;
+  height: 30vh;
+  width: 30vh;
 }
 </style>
+
+ <!-- <p>slice0-4updateddate closed date</p> v-if!state.bug.closed -->

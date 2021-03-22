@@ -8,6 +8,7 @@
             <p>{{ note.creator.email }}</p>
             <img :src="note.creator.picture" />
             <i
+              v-if="note.creator.email == state.user.email"
               id="deleteButton"
               type="button"
               class="fas fa-skull text-danger float-right"

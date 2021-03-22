@@ -35,6 +35,10 @@ class BugsService {
     if (window.confirm('But are you sure?')) { await api.delete('api/bugs/' + id) }
     this.getBug(id)
   }
+
+  async editBug(bug) {
+    await api.put('api/bugs/' + bug.id, bug)
+  }
 }
 
 export const bugsService = new BugsService()
