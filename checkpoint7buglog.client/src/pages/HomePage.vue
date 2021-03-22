@@ -12,7 +12,7 @@
       <CreateBugModal />
     </div>
     <div>
-      <button class="btn" @click="filterBugs">Show closed bugs</button>
+      <button class="btn" @click="filterBugs">Show open bugs</button>
     </div>
 
     <div class="row">
