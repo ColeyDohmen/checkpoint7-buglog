@@ -32,7 +32,7 @@ class BugsService {
   }
 
   async deleteBug(id) {
-    if (window.confirm('But are you sure?')) { await api.delete('api/bugs/' + id) }
+    if (window.confirm('Do you wish to close this bug?')) { await api.delete('api/bugs/' + id) }
     this.getBug(id)
   }
 

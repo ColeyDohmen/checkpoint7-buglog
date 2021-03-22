@@ -28,10 +28,7 @@
             <p v-if="state.bug.closed == true" class="text-danger">CLOSED</p>
             <p v-if="state.bug.closed == false" class="text-success">OPEN</p>
           </div>
-          <div>
-            <!-- {{ state.bug.updatedAt.slice(0, 10) }} -->
-            Last updated: {{ fixDate(state.bug.updatedAt) }}
-          </div>
+          <div>Last updated: {{ fixDate(state.bug.updatedAt) }}</div>
         </div>
       </div>
     </div>
@@ -49,7 +46,7 @@
               aria-describedby="helpId"
               v-model="state.newNote.body"
             />
-            <button class="btn btn-success py-2 mx-2 my-2" type="submit">
+            <button class="btn btn-success btn-lg py-2 mx-2 my-2" type="submit">
               Submit
             </button>
           </div>
@@ -74,7 +71,7 @@ export default {
   props: {
     bug: { type: Object, required: true }
   },
-  setup(props) {
+  setup() {
     const route = useRoute()
     const state = reactive({
       user: computed(() => AppState.user),
@@ -111,8 +108,8 @@ export default {
 
 <style lang="scss" scoped>
 .profile-picture {
-  height: 30vh;
-  width: 30vh;
+  height: 20vh;
+  width: 20vh;
 }
 </style>
 

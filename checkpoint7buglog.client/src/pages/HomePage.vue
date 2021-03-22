@@ -12,7 +12,9 @@
       <CreateBugModal />
     </div>
     <div>
-      <button class="btn" @click="filterBugs">Show open bugs</button>
+      <button class="btn btn-success py-2 mx-4" @click="filterBugs">
+        Show open bugs
+      </button>
     </div>
 
     <div class="row">
@@ -23,7 +25,6 @@
     </h1>
   </div>
 </template>
-// v-if="state.filteredBugs"
 
 <script>
 import { computed, onMounted, reactive } from 'vue'

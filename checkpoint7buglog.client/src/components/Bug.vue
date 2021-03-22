@@ -1,6 +1,6 @@
 <template>
   <div class="component">
-    <div class="card py-2 mx-2" style="width: 18rem">
+    <div class="card py-2 mx-4 my-2" style="width: 18rem">
       <div class="col-12">
         <h3 id="textTitle">
           <b>{{ bug.title }}</b>
@@ -13,8 +13,8 @@
         </div>
       </div>
       <router-link :to="{ name: 'ActiveBugPage', params: { id: bug.id } }">
-        <button type="button" class="btn btn-primary">
-          Open bug<i class="fas fa-chevron-right"></i>
+        <button type="button" class="btn btn-primary mx-2">
+          Open bug <i class="fas fa-chevron-right"></i>
         </button>
       </router-link>
     </div>
