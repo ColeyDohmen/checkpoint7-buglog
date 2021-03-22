@@ -11,6 +11,10 @@
       </button>
       <CreateBugModal />
     </div>
+    <div>
+      <button class="btn" @click="filterBugs">Show closed bugs</button>
+    </div>
+
     <div class="row">
       <Bug v-for="bug in state.bugs" :key="bug.id" :bug="bug" />
     </div>
@@ -19,6 +23,7 @@
     </h1>
   </div>
 </template>
+// v-if="state.filteredBugs"
 
 <script>
 import { computed, onMounted, reactive } from 'vue'
@@ -30,13 +35,17 @@ export default {
     const state = reactive({
       user: computed(() => AppState.user),
       account: computed(() => AppState.account),
-      bugs: computed(() => AppState.bugs)
+      bugs: computed(() => AppState.bugs),
+      filteredBugs: computed(() => AppState.bugs.filter(bug => bug.closed === false))
     })
     onMounted(async () => {
       await bugsService.getAllBugs()
     })
     return {
-      state
+      state,
+      filterBugs() {
+        AppState.bugs = state.filteredBugs
+      }
     }
   },
   components: {}
