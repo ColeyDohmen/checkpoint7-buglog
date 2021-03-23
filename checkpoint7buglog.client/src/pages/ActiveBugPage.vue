@@ -35,22 +35,27 @@
     <div class="row">
       <div class="col-12">
         <h4>Notes:</h4>
-        <form @submit.prevent="createNote">
-          <div class="form-group py-2 mx-2">
-            <input
-              type="text"
-              name="body"
-              id="body"
-              class="form-control"
-              placeholder="Enter new note"
-              aria-describedby="helpId"
-              v-model="state.newNote.body"
-            />
-            <button class="btn btn-success btn-lg py-2 mx-2 my-2" type="submit">
-              Submit
-            </button>
-          </div>
-        </form>
+        <div v-if="!state.bug.closed">
+          <form @submit.prevent="createNote">
+            <div class="form-group py-2 mx-2">
+              <input
+                type="text"
+                name="body"
+                id="body"
+                class="form-control"
+                placeholder="Enter new note"
+                aria-describedby="helpId"
+                v-model="state.newNote.body"
+              />
+              <button
+                class="btn btn-success btn-lg py-2 mx-2 my-2"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
       <!-- {{ state.notes }} -->
       <Notes v-for="note in state.notes" :key="note.id" :note="note" />
